@@ -24,7 +24,7 @@ buttons.tButtons = {
 --    }
 }
 
-function buttons.sebuttons.tButtons(dict)
+function buttons.setbuttons(dict)
 	buttons.tButtons = dict
 end
 
