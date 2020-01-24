@@ -8,51 +8,51 @@ local internetProxy = component.proxy(component.list("internet")())
 
 local screenWidth, screenHeight = GPUProxy.getResolution()
 
-----------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------
 
-local function download(url, file)
-	local handle, data, chunk = internetProxy.request(url), ""
+local function download(url, filename)
+    local handle, data, chunk = internetProxy.request(url), ""
     
-	while true do
-		chunk = handle.read(math.huge)
-		if chunk then
-			data = data .. chunk
-		else
-			break
-		end
-	end
+    while true do
+        chunk = handle.read(math.huge)
+        if chunk then
+            data = data .. chunk
+        else
+            break
+        end
+    end
  
-	handle.close()
-	
-	local file = io.open(file, "w")
-	file:write(data)
-	file:close()
+    handle.close()
+    
+    local file = io.open(filename, "w")
+    file:write(data)
+    file:close()
 end
 
 local function centrize(width)
-	return math.floor(screenWidth / 2 - width / 2)
+    return math.floor(screenWidth / 2 - width / 2)
 end
 
 local function centrizedText(y, color, text)
-	GPUProxy.fill(1, y, screenWidth, 1, " ")
-	GPUProxy.setForeground(color)
-	GPUProxy.set(centrize(#text), y, text)
+    GPUProxy.fill(1, y, screenWidth, 1, " ")
+    GPUProxy.setForeground(color)
+    GPUProxy.set(centrize(#text), y, text)
 end
 
 local function title()
-	local y = math.floor(screenHeight / 2 - 1)
-	centrizedText(y, 0x000000, "Установка SuperOs")
-	return y + 2
+    local y = math.floor(screenHeight / 2 - 1)
+    centrizedText(y, 0x000000, "Установка SuperOs")
+    return y + 2
 end
 
 local function progress(value)
-	local width = 26
-	local x, y, part = centrize(width), title(), math.ceil(width * value)
-	
-	GPUProxy.setForeground(0x000000)
-	GPUProxy.set(x, y, string.rep("-", part))
-	GPUProxy.setForeground(0x7F7F7F)
-	GPUProxy.set(x + part, y, string.rep("-", width - part))
+    local width = 26
+    local x, y, part = centrize(width), title(), math.ceil(width * value)
+    
+    GPUProxy.setForeground(0x000000)
+    GPUProxy.set(x, y, string.rep("-", part))
+    GPUProxy.setForeground(0x7F7F7F)
+    GPUProxy.set(x + part, y, string.rep("-", width - part))
 end
 
 ---------------------------------------------------------------------------------------------------
