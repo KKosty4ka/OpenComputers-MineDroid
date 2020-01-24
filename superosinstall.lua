@@ -8,7 +8,7 @@ local internetProxy = component.proxy(component.list("internet")())
 
 local screenWidth, screenHeight = GPUProxy.getResolution()
 
----------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------
 
 local function download(url, file)
 	local handle, data, chunk = internetProxy.request(url), ""
