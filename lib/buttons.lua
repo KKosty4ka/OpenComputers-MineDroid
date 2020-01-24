@@ -24,10 +24,6 @@ buttons.tButtons = {
 --    }
 }
 
-function buttons.setbuttons(dict)
-	buttons.tButtons = dict
-end
-
 function buttons.drawButton(n) -- функция рисования кнопки
     gpu.setBackground(buttons.tButtons[n].color) -- задаем цвет кнопки
     gpu.setForeground(buttons.tButtons[n].textColor) -- задаем цвет текста
