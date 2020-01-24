@@ -8,7 +8,7 @@ local b_color, f_color = gpu.getBackground(), gpu.getForeground()
 
 local buttons = {}
 
-local tButtons = {
+buttons.tButtons = {
 --    {
 --        visible = false,
 --        X = 1,
@@ -24,50 +24,50 @@ local tButtons = {
 --    }
 }
 
-function buttons.setButtons(dict)
-	tButtons = dict
+function buttons.sebuttons.tButtons(dict)
+	buttons.tButtons = dict
 end
 
-local function drawButton(n) -- функция рисования кнопки
-    gpu.setBackground(tButtons[n].color) -- задаем цвет кнопки
-    gpu.setForeground(tButtons[n].textColor) -- задаем цвет текста
-    gpu.fill(tButtons[n].X, tButtons[n].Y, tButtons[n].W, tButtons[n].H, ' ') -- заливаем область
-    gpu.set(tButtons[n].X+(tButtons[n].W/2)-(#tButtons[n].text/2), tButtons[n].Y+(tButtons[n].H/2), tButtons[n].text) -- пишем текст по центру
+function buttons.drawButton(n) -- функция рисования кнопки
+    gpu.setBackground(buttons.tButtons[n].color) -- задаем цвет кнопки
+    gpu.setForeground(buttons.tButtons[n].textColor) -- задаем цвет текста
+    gpu.fill(buttons.tButtons[n].X, buttons.tButtons[n].Y, buttons.tButtons[n].W, buttons.tButtons[n].H, ' ') -- заливаем область
+    gpu.set(buttons.tButtons[n].X+(buttons.tButtons[n].W/2)-(#buttons.tButtons[n].text/2), buttons.tButtons[n].Y+(buttons.tButtons[n].H/2), buttons.tButtons[n].text) -- пишем текст по центру
 end
 
-local function toggleVisible(n) -- переключение видимости кнопки
-    if tButtons[n].visible then -- если кнопка видима
-        tButtons[n].visible = false -- отключаем
+function buttons.toggleVisible(n) -- переключение видимости кнопки
+    if buttons.tButtons[n].visible then -- если кнопка видима
+        buttons.tButtons[n].visible = false -- отключаем
         gpu.setBackground(b_color) -- берем цвет фона, полученный при старте программы
-        gpu.fill(tButtons[n].X, tButtons[n].Y, tButtons[n].W, tButtons[n].H, ' ') -- стираем кнопку
+        gpu.fill(buttons.tButtons[n].X, buttons.tButtons[n].Y, buttons.tButtons[n].W, buttons.tButtons[n].H, ' ') -- стираем кнопку
     else -- если кнопка не активна
-        tButtons[n].visible = true -- активируем
-        drawButton(n) -- запускаем отрисовку
+        buttons.tButtons[n].visible = true -- активируем
+        buttons.drawButton(n) -- запускаем отрисовку
     end
 end
 
-local function blink(n) -- мигание кнопки
-    tButtons[n].color, tButtons[n].textColor = tButtons[n].textColor, tButtons[n].color -- меняем местами цвета фона и текста
-    drawButton(n) -- отрисовываем кнопку
+function buttons.blink(n) -- мигание кнопки
+    buttons.tButtons[n].color, buttons.tButtons[n].textColor = buttons.tButtons[n].textColor, buttons.tButtons[n].color -- меняем местами цвета фона и текста
+    buttons.drawButton(n) -- отрисовываем кнопку
     os.sleep(0.09) -- делаем задержку
-    tButtons[n].color, tButtons[n].textColor = tButtons[n].textColor, tButtons[n].color -- меняем цвета обратно
-    drawButton(n) -- перерисовываем кнопку
+    buttons.tButtons[n].color, buttons.tButtons[n].textColor = buttons.tButtons[n].textColor, buttons.tButtons[n].color -- меняем цвета обратно
+    buttons.drawButton(n) -- перерисовываем кнопку
 end
 
 gpu.fill(1, 1, W, H, ' ') -- очищаем экран
 
-for i = 1, #tButtons do
-    toggleVisible(i) -- активируем каждую кнопку
+for i = 1, #buttons.tButtons do
+    buttons.toggleVisible(i) -- активируем каждую кнопку
 end
 
 function buttons.main()
 	while true do
 		local tEvent = {pull_e('touch')} -- ждем клика
-		for i = 1, #tButtons do -- перебираем все кнопки
-			if tButtons[i].visible then -- если кнопка активна
-				if tEvent[3] >= tButtons[i].X and tEvent[3] <= tButtons[i].X+tButtons[i].W and tEvent[4] >= tButtons[i].Y and tEvent[4] <= tButtons[i].Y+tButtons[i].H then -- если клик произведен в пределах кнопки
-				blink(i) -- мигнуть кнопкой
-				tButtons[i].action() -- выполнить назначенный код
+		for i = 1, #buttons.tButtons do -- перебираем все кнопки
+			if buttons.tButtons[i].visible then -- если кнопка активна
+				if tEvent[3] >= buttons.tButtons[i].X and tEvent[3] <= buttons.tButtons[i].X+buttons.tButtons[i].W and tEvent[4] >= buttons.tButtons[i].Y and tEvent[4] <= buttons.tButtons[i].Y+buttons.tButtons[i].H then -- если клик произведен в пределах кнопки
+				buttons.blink(i) -- мигнуть кнопкой
+				buttons.tButtons[i].action() -- выполнить назначенный код
 				break
 				end
 			end
