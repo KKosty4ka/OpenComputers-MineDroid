@@ -50,7 +50,7 @@ local tButtons = {
 		H = 1,
 		color = 0x00AA00,
 		textColor = 0xffffff,
-		text = "Îáíîâèòü ñèñòåìó",
+		text = "ÐžÐ±Ð½Ð¾Ð²Ð¸Ñ‚ÑŒ ÑÐ¸ÑÑ‚ÐµÐ¼Ñƒ",
 		action = update
 	},
 	{
@@ -61,7 +61,7 @@ local tButtons = {
 		H = 1,
 		color = 0xAA0000,
 		textColor = 0xffffff,
-		text = "Ñòåðåòü âñ¸",
+		text = "Ð¡Ñ‚ÐµÑ€ÐµÑ‚ÑŒ Ð²ÑÑ‘",
 		action = del_all
 	}
 }
@@ -74,45 +74,45 @@ local tButtons = {
 
 
 
-local function drawButton(n) -- ôóíêöèÿ ðèñîâàíèÿ êíîïêè
-  gpu.setBackground(tButtons[n].color) -- çàäàåì öâåò êíîïêè
-  gpu.setForeground(tButtons[n].textColor) -- çàäàåì öâåò òåêñòà
-  gpu.fill(tButtons[n].X, tButtons[n].Y, tButtons[n].W, tButtons[n].H, ' ') -- çàëèâàåì îáëàñòü
-  gpu.set(tButtons[n].X+(tButtons[n].W/2)-(#tButtons[n].text/2), tButtons[n].Y+(tButtons[n].H/2), tButtons[n].text) -- ïèøåì òåêñò ïî öåíòðó
+local function drawButton(n) -- Ñ„ÑƒÐ½ÐºÑ†Ð¸Ñ Ñ€Ð¸ÑÐ¾Ð²Ð°Ð½Ð¸Ñ ÐºÐ½Ð¾Ð¿ÐºÐ¸
+  gpu.setBackground(tButtons[n].color) -- Ð·Ð°Ð´Ð°ÐµÐ¼ Ñ†Ð²ÐµÑ‚ ÐºÐ½Ð¾Ð¿ÐºÐ¸
+  gpu.setForeground(tButtons[n].textColor) -- Ð·Ð°Ð´Ð°ÐµÐ¼ Ñ†Ð²ÐµÑ‚ Ñ‚ÐµÐºÑÑ‚Ð°
+  gpu.fill(tButtons[n].X, tButtons[n].Y, tButtons[n].W, tButtons[n].H, ' ') -- Ð·Ð°Ð»Ð¸Ð²Ð°ÐµÐ¼ Ð¾Ð±Ð»Ð°ÑÑ‚ÑŒ
+  gpu.set(tButtons[n].X+(tButtons[n].W/2)-(#tButtons[n].text/2), tButtons[n].Y+(tButtons[n].H/2), tButtons[n].text) -- Ð¿Ð¸ÑˆÐµÐ¼ Ñ‚ÐµÐºÑÑ‚ Ð¿Ð¾ Ñ†ÐµÐ½Ñ‚Ñ€Ñƒ
 end
 
-local function toggleVisible(n) -- ïåðåêëþ÷åíèå âèäèìîñòè êíîïêè
-  if tButtons[n].visible then -- åñëè êíîïêà âèäèìà
-    tButtons[n].visible = false -- îòêëþ÷àåì
-    gpu.setBackground(b_color) -- áåðåì öâåò ôîíà, ïîëó÷åííûé ïðè ñòàðòå ïðîãðàììû
-    gpu.fill(tButtons[n].X, tButtons[n].Y, tButtons[n].W, tButtons[n].H, ' ') -- ñòèðàåì êíîïêó
-  else -- åñëè êíîïêà íå àêòèâíà
-    tButtons[n].visible = true -- àêòèâèðóåì
-    drawButton(n) -- çàïóñêàåì îòðèñîâêó
+local function toggleVisible(n) -- Ð¿ÐµÑ€ÐµÐºÐ»ÑŽÑ‡ÐµÐ½Ð¸Ðµ Ð²Ð¸Ð´Ð¸Ð¼Ð¾ÑÑ‚Ð¸ ÐºÐ½Ð¾Ð¿ÐºÐ¸
+  if tButtons[n].visible then -- ÐµÑÐ»Ð¸ ÐºÐ½Ð¾Ð¿ÐºÐ° Ð²Ð¸Ð´Ð¸Ð¼Ð°
+    tButtons[n].visible = false -- Ð¾Ñ‚ÐºÐ»ÑŽÑ‡Ð°ÐµÐ¼
+    gpu.setBackground(b_color) -- Ð±ÐµÑ€ÐµÐ¼ Ñ†Ð²ÐµÑ‚ Ñ„Ð¾Ð½Ð°, Ð¿Ð¾Ð»ÑƒÑ‡ÐµÐ½Ð½Ñ‹Ð¹ Ð¿Ñ€Ð¸ ÑÑ‚Ð°Ñ€Ñ‚Ðµ Ð¿Ñ€Ð¾Ð³Ñ€Ð°Ð¼Ð¼Ñ‹
+    gpu.fill(tButtons[n].X, tButtons[n].Y, tButtons[n].W, tButtons[n].H, ' ') -- ÑÑ‚Ð¸Ñ€Ð°ÐµÐ¼ ÐºÐ½Ð¾Ð¿ÐºÑƒ
+  else -- ÐµÑÐ»Ð¸ ÐºÐ½Ð¾Ð¿ÐºÐ° Ð½Ðµ Ð°ÐºÑ‚Ð¸Ð²Ð½Ð°
+    tButtons[n].visible = true -- Ð°ÐºÑ‚Ð¸Ð²Ð¸Ñ€ÑƒÐµÐ¼
+    drawButton(n) -- Ð·Ð°Ð¿ÑƒÑÐºÐ°ÐµÐ¼ Ð¾Ñ‚Ñ€Ð¸ÑÐ¾Ð²ÐºÑƒ
   end
 end
 
-local function blink(n) -- ìèãàíèå êíîïêè
-  tButtons[n].color, tButtons[n].textColor = tButtons[n].textColor, tButtons[n].color -- ìåíÿåì ìåñòàìè öâåòà ôîíà è òåêñòà
-  drawButton(n) -- îòðèñîâûâàåì êíîïêó
-  os.sleep(0.09) -- äåëàåì çàäåðæêó
-  tButtons[n].color, tButtons[n].textColor = tButtons[n].textColor, tButtons[n].color -- ìåíÿåì öâåòà îáðàòíî
-  drawButton(n) -- ïåðåðèñîâûâàåì êíîïêó
+local function blink(n) -- Ð¼Ð¸Ð³Ð°Ð½Ð¸Ðµ ÐºÐ½Ð¾Ð¿ÐºÐ¸
+  tButtons[n].color, tButtons[n].textColor = tButtons[n].textColor, tButtons[n].color -- Ð¼ÐµÐ½ÑÐµÐ¼ Ð¼ÐµÑÑ‚Ð°Ð¼Ð¸ Ñ†Ð²ÐµÑ‚Ð° Ñ„Ð¾Ð½Ð° Ð¸ Ñ‚ÐµÐºÑÑ‚Ð°
+  drawButton(n) -- Ð¾Ñ‚Ñ€Ð¸ÑÐ¾Ð²Ñ‹Ð²Ð°ÐµÐ¼ ÐºÐ½Ð¾Ð¿ÐºÑƒ
+  os.sleep(0.09) -- Ð´ÐµÐ»Ð°ÐµÐ¼ Ð·Ð°Ð´ÐµÑ€Ð¶ÐºÑƒ
+  tButtons[n].color, tButtons[n].textColor = tButtons[n].textColor, tButtons[n].color -- Ð¼ÐµÐ½ÑÐµÐ¼ Ñ†Ð²ÐµÑ‚Ð° Ð¾Ð±Ñ€Ð°Ñ‚Ð½Ð¾
+  drawButton(n) -- Ð¿ÐµÑ€ÐµÑ€Ð¸ÑÐ¾Ð²Ñ‹Ð²Ð°ÐµÐ¼ ÐºÐ½Ð¾Ð¿ÐºÑƒ
 end
 
-gpu.fill(1, 1, W, H, ' ') -- î÷èùàåì ýêðàí
+gpu.fill(1, 1, W, H, ' ') -- Ð¾Ñ‡Ð¸Ñ‰Ð°ÐµÐ¼ ÑÐºÑ€Ð°Ð½
 
 for i = 1, #tButtons do
-  toggleVisible(i) -- àêòèâèðóåì êàæäóþ êíîïêó
+  toggleVisible(i) -- Ð°ÐºÑ‚Ð¸Ð²Ð¸Ñ€ÑƒÐµÐ¼ ÐºÐ°Ð¶Ð´ÑƒÑŽ ÐºÐ½Ð¾Ð¿ÐºÑƒ
 end
 
 while true do
-  local tEvent = {pull_e('touch')} -- æäåì êëèêà
-  for i = 1, #tButtons do -- ïåðåáèðàåì âñå êíîïêè
-    if tButtons[i].visible then -- åñëè êíîïêà àêòèâíà
-      if tEvent[3] >= tButtons[i].X and tEvent[3] <= tButtons[i].X+tButtons[i].W and tEvent[4] >= tButtons[i].Y and tEvent[4] <= tButtons[i].Y+tButtons[i].H then -- åñëè êëèê ïðîèçâåäåí â ïðåäåëàõ êíîïêè
-       blink(i) -- ìèãíóòü êíîïêîé
-       tButtons[i].action() -- âûïîëíèòü íàçíà÷åííûé êîä
+  local tEvent = {pull_e('touch')} -- Ð¶Ð´ÐµÐ¼ ÐºÐ»Ð¸ÐºÐ°
+  for i = 1, #tButtons do -- Ð¿ÐµÑ€ÐµÐ±Ð¸Ñ€Ð°ÐµÐ¼ Ð²ÑÐµ ÐºÐ½Ð¾Ð¿ÐºÐ¸
+    if tButtons[i].visible then -- ÐµÑÐ»Ð¸ ÐºÐ½Ð¾Ð¿ÐºÐ° Ð°ÐºÑ‚Ð¸Ð²Ð½Ð°
+      if tEvent[3] >= tButtons[i].X and tEvent[3] <= tButtons[i].X+tButtons[i].W and tEvent[4] >= tButtons[i].Y and tEvent[4] <= tButtons[i].Y+tButtons[i].H then -- ÐµÑÐ»Ð¸ ÐºÐ»Ð¸Ðº Ð¿Ñ€Ð¾Ð¸Ð·Ð²ÐµÐ´ÐµÐ½ Ð² Ð¿Ñ€ÐµÐ´ÐµÐ»Ð°Ñ… ÐºÐ½Ð¾Ð¿ÐºÐ¸
+       blink(i) -- Ð¼Ð¸Ð³Ð½ÑƒÑ‚ÑŒ ÐºÐ½Ð¾Ð¿ÐºÐ¾Ð¹
+       tButtons[i].action() -- Ð²Ñ‹Ð¿Ð¾Ð»Ð½Ð¸Ñ‚ÑŒ Ð½Ð°Ð·Ð½Ð°Ñ‡ÐµÐ½Ð½Ñ‹Ð¹ ÐºÐ¾Ð´
        break
       end
     end
