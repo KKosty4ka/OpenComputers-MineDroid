@@ -11,22 +11,7 @@ local screenWidth, screenHeight = GPUProxy.getResolution()
 ---------------------------------------------------------------------------------------------------
 
 local function download(url, filename)
-    local handle, data, chunk = internetProxy.request(url), ""
-    
-    while true do
-        chunk = handle.read(math.huge)
-        if chunk then
-            data = data .. chunk
-        else
-            break
-        end
-    end
- 
-    handle.close()
-    
-    local file = io.open(filename, "w")
-    file:write(data)
-    file:close()
+    pcall(shell2.execute, "wget -f " .. url .. " " .. filename)
 end
 
 local function centrize(width)
