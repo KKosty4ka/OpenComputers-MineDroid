@@ -46,4 +46,7 @@ GPUProxy.setBackground(0xFFFFFF)
 GPUProxy.fill(1, 1, screenWidth, screenHeight, " ")
 
 progress(0.1)
+pcall(shell2.execute, "md /minedroid")
+
+progress(0.2)
 download("https://raw.githubusercontent.com/KKosty4ka/OpenComputers-MineDroid/master/minedroid/desktop.lua", "/minedroid/desktop.lua")
