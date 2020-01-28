@@ -1,1 +1,1 @@
-# OpenComputers-SuperOS
+# OpenComputer/MineDroid
